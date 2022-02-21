@@ -16,30 +16,33 @@ public class MainMenu : MonoBehaviour
     //UI动画
     public Animator uiAnim;
 
-    //暂停菜单
-    public GameObject pauseMenu;
     
 
+    //开始动画
     void Start()
     {
         loadScreen.SetActive(false);
     }
 
-    
+    //开始游戏
     public void StartGame()
     {
         StartCoroutine(LoadLevel());
     }
 
+    //退出游戏
     public void QuitGame()
     {
         Application.Quit();
     }
 
+    //按键动画
     public void UIEnable()
     {
         uiAnim.SetBool("Start", true);
     }
+
+    
 
     //异步加载
     IEnumerator LoadLevel()
@@ -75,10 +78,6 @@ public class MainMenu : MonoBehaviour
         aOper.allowSceneActivation = true;
     }
 
-    //暂停
-    public void PauseMenu()
-    {
-
-    }
+    
 
 }
