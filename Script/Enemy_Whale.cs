@@ -5,11 +5,11 @@ using UnityEngine;
 public class Enemy_Whale : MonoBehaviour
 {
     //创建变量
-    private Rigidbody2D rb;
-    private Animator anim;
+    Rigidbody2D rb;
+    Animator anim;
     public Animator animPlayer;
-    private BoxCollider2D coll;
-    private AudioSource audioDeath;
+    public BoxCollider2D coll;
+    AudioSource audioDeath;
     public Transform playerX;
     public LayerMask ground;
 
@@ -23,7 +23,6 @@ public class Enemy_Whale : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        coll = GetComponent<BoxCollider2D>();
         audioDeath = GetComponent<AudioSource>();
 
 
@@ -111,7 +110,7 @@ public class Enemy_Whale : MonoBehaviour
     }
 
 
-    //开始跳跃    
+    //开始跳跃 //动画事件
     void Jump()
     {
         anim.SetBool("IfGround", false);

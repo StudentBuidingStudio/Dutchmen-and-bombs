@@ -5,10 +5,10 @@ using UnityEngine;
 public class Enemy_BaldPirate : MonoBehaviour
 {
     //创建变量
-    private Rigidbody2D rb;
-    private Animator anim;
+    Rigidbody2D rb;
+    Animator anim;
     public Animator animPlayer;
-    private BoxCollider2D coll;
+    public BoxCollider2D coll;
     private AudioSource audioDeath;
     public Transform playerX;
     public LayerMask ground;
@@ -29,7 +29,6 @@ public class Enemy_BaldPirate : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        coll = GetComponent<BoxCollider2D>();
         audioDeath = GetComponent<AudioSource>();
 
         coll.isTrigger = false;

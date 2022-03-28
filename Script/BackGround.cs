@@ -6,7 +6,7 @@ public class BackGround : MonoBehaviour
 {
     public Transform cam;
     public float moveRate;
-    private float startPointx,startPointy;
+    float startPointx,startPointy;
     // Start is called before the first frame update
     void Start()
     {

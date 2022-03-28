@@ -5,20 +5,29 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     //变量创建
-    private Rigidbody2D rb;
-    private Animator anim;
-    public AudioSource audioCollectCrystal,audioCollectHeart, audioJump,audioDie;
+    [Header("物理")]
+    Rigidbody2D rb;
+    Animator anim;
+    public float speed, jumpForce, jumpDuration,
+    fallingDuration;
+    public int jumpCount;
+    public bool ifJump, ifJumped1, ifJumped2;
     public LayerMask ground;
+
+    [Header("音频")]
+    public AudioSource audioCollectCrystal,audioCollectHeart, audioJump,audioDie;
+    
+    [Header("属性")]
     public BoxCollider2D collButton, collMain;
     public Text crystalNumber;
-    public GameObject heartImage1, heartImage2, heartImage3
-    ,cameraMove;
+    public int heart = 3, crystal = 0 ,opTime;
+    public bool ifHurt = false;
     
-
-    public float speed, jumpForce,jumpDuration;
-    public float fallingDuration;
-    public int jumpCount, heart = 3, crystal = 0 ,opTime;
-    public bool ifHurt = false, ifJump, ifJumped1,ifJumped2;
+    [Header("其他物品")]
+    public GameObject heartImage1, heartImage2, heartImage3
+    ,cameraMove,
+    bomb;
+    
 
 
 
@@ -47,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
         HeartImage();
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyUp(KeyCode.K))
         {
             ThrowBomb();
         }
@@ -225,28 +234,26 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.tag = "Untagged";
             
         }
-    }
-
-    //敌人互动
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Enemies")
+        
+        
+        //敌人互动
+        if (collision.tag == "Enemies")
         {
-            
+
             //获取敌人方向
             float enemyFace = (transform.position.x - collision.gameObject.transform.position.x)
                 / Mathf.Abs(transform.position.x - collision.gameObject.transform.position.x);
             //踩踏伤害
-            if (anim.GetBool("IfFalling") && collButton.IsTouching(collision.collider))
+            if (anim.GetBool("IfFalling") && collButton.IsTouching(collision))
             {
                 //伤害
                 collision.gameObject.tag = "Untagged";
                 //力的作用是相互的
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                
+
                 anim.SetBool("IfJumping", true);
                 anim.SetBool("IfFalling", false);
-            } 
+            }
             //受伤
             else
             {
@@ -255,13 +262,16 @@ public class PlayerController : MonoBehaviour
                 transform.localScale = new Vector3(-enemyFace, 1, 1);
                 //op时间
                 if (opTime == 0)
-                { heart -= 1;opTime = 10; }
-                
+                { heart -= 1; opTime = 10; }
+
                 ifHurt = true;
                 anim.SetBool("IfHurting", true);
-                
+
             }
         }
+
+    
+    
         
 
 
@@ -337,11 +347,15 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //下蛋
+    //原力投弹
     public void ThrowBomb()
     {
-        //都怪励喆宇 我tm没有想法啊啊啊 啊啊啊啊啊啊
+        Vector2 playerPosition = new Vector2(transform.position.x, transform.position.y);
+        Bomb ctrledBomb = bomb.GetComponent<Bomb>();
+        Vector2 bombPos = new Vector2(transform.position.x + (transform.localScale.x * -1), transform.position.y);
+        ctrledBomb.beTh(bombPos);
         
+    
     }
     
     
