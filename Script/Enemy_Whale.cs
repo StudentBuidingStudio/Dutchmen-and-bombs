@@ -52,17 +52,16 @@ public class Enemy_Whale : MonoBehaviour
         //в╥вы
         if ((Mathf.Abs(transform.position.x - playerX.position.x) < 8) && !animPlayer.GetBool("IfDead"))
         {
-            if (Mathf.Abs(rb.velocity.x) < 4)
-            {
-                if (!coll.IsTouchingLayers(ground))
+
+            if (!coll.IsTouchingLayers(ground))
                 {
-                    rb.velocity = new Vector2(rb.velocity.x + ((float)(-1 * speed *
-                (transform.position.x - playerX.position.x) / Mathf.Abs(transform.position.x - playerX.position.x))),
+                rb.velocity = new Vector2((float)(-1 * speed *
+                (transform.position.x - playerX.position.x) / Mathf.Abs(transform.position.x - playerX.position.x)),
                 rb.velocity.y);
                 }
                 anim.SetBool("IfRunning", true);   
                
-            }
+            
 
             if (anim.GetBool("IfJumping") && rb.velocity.y < 0.1f)
             {

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5729434424043448262}
   - component: {fileID: 5729434424043448269}
   - component: {fileID: 5729434424043448268}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Whale
   m_TagString: Enemies
   m_Icon: {fileID: 0}
@@ -173,14 +173,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16dbc0fdfe8efa478ff963286f6f24c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animPlayer: {fileID: 8830954524298344238, guid: c73726683aabd5d4ea85a631a221d074, type: 3}
+  animPlayer: {fileID: 306125995, guid: c165f55791e574d448edc7e9e9eef6e4, type: 3}
   coll: {fileID: 3442720367422679759}
-  playerX: {fileID: 8830954524298344234, guid: c73726683aabd5d4ea85a631a221d074, type: 3}
+  playerX: {fileID: 4183999391679600584, guid: c165f55791e574d448edc7e9e9eef6e4, type: 3}
   ground:
     serializedVersion: 2
     m_Bits: 512
   heart: 1
-  speed: 1
+  speed: 5
 --- !u!95 &5729434424043448269
 Animator:
   serializedVersion: 3

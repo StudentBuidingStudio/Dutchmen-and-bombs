@@ -24,8 +24,7 @@ public class PlayerController : MonoBehaviour
     public bool ifHurt = false;
     
     [Header("其他物品")]
-    public GameObject heartImage1, heartImage2, heartImage3
-    ,cameraMove,
+    public GameObject cameraMove,
     bomb;
     
 
@@ -280,19 +279,7 @@ public class PlayerController : MonoBehaviour
     //生命控制
     void HeartImage()
     {
-        //生命条
-        if (heart < 3)
-        { heartImage3.SetActive(false); }
-        else
-        { heartImage3.SetActive(true); }
-        if (heart < 2)
-        { heartImage2.SetActive(false); }
-        else
-        { heartImage2.SetActive(true); }
-        if (heart < 1)
-        { heartImage1.SetActive(false); }
-        else
-        { heartImage1.SetActive(true); }
+        
 
         //掉出地图
         if (transform.position.y < -30)
