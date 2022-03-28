@@ -103,6 +103,7 @@ public class Enemy_Whale : MonoBehaviour
             anim.SetBool("IfJumping", true);
         }
 
+        //尸体重力处理
         if (anim.GetBool("IfDead") && coll.IsTouchingLayers(ground))
         {
             rb.bodyType = RigidbodyType2D.Static;
@@ -133,6 +134,7 @@ public class Enemy_Whale : MonoBehaviour
                 //趋势
                 anim.SetBool("IfDead", true);
                 coll.isTrigger = true;
+                GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodyLayer";
                 audioDeath.Play();
             }
         }

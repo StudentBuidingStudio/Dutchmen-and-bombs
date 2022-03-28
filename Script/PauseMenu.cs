@@ -9,12 +9,13 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
     public AudioMixer mainMixer;
-    
+    public float audioSourse;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        pauseMenu.SetActive(false);
+        mainMixer.SetFloat("MainVolume", 0);
     }
 
     // Update is called once per frame
@@ -35,17 +36,19 @@ public class PauseMenu : MonoBehaviour
         {
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
+            mainMixer.SetFloat("MainVolume", audioSourse);
         }
         else
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
+            mainMixer.SetFloat("MainVolume", -80);
         }
 
     }
 
     public void SetVolume(float value)
     {
-        mainMixer.SetFloat("MainVolume",value);
+        audioSourse = value;
     }
 }

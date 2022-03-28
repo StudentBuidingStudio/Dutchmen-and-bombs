@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour
         ControllAnim();
 
         HeartImage();
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ThrowBomb();
+        }
     }
 
     private void FixedUpdate()
@@ -326,9 +331,17 @@ public class PlayerController : MonoBehaviour
     }
 
     //取消落地状态 //动画事件
-    void StopGround()
+    void StopGroundAnim()
     {
         anim.SetBool("IfGround", false);
+    }
+
+
+    //下蛋
+    public void ThrowBomb()
+    {
+        //都怪励喆宇 我tm没有想法啊啊啊 啊啊啊啊啊啊
+        
     }
     
     

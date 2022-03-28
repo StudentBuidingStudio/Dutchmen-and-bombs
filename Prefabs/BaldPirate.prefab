@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -969621265
-  m_SortingLayer: 0
+  m_SortingLayerID: -587541343
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: af05e8ad2a827ce408f0f60501040ac1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &7851341738672767279
 BoxCollider2D:
@@ -167,6 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animPlayer: {fileID: 0}
   playerX: {fileID: 0}
+  ground:
+    serializedVersion: 2
+    m_Bits: 64
   speed: 0.15
   heart: 0
 --- !u!82 &6499724370537903022

@@ -11,6 +11,8 @@ public class Enemy_BaldPirate : MonoBehaviour
     private BoxCollider2D coll;
     private AudioSource audioDeath;
     public Transform playerX;
+    public LayerMask ground;
+
 
 
 
@@ -51,6 +53,8 @@ public class Enemy_BaldPirate : MonoBehaviour
         {
             Dead();
         }
+
+        AnimCtrl();
     }
 
     //移动
@@ -93,12 +97,58 @@ public class Enemy_BaldPirate : MonoBehaviour
             {
                 anim.SetBool("IfDead", true);
                 coll.isTrigger = true;
-                rb.bodyType = RigidbodyType2D.Static;
+                GetComponent<SpriteRenderer>().sortingLayerName = "DeadBodyLayer";
                 audioDeath.Play();
             }
         }
 
+       
+
     }
+
+
+    //动画
+    void AnimCtrl()
+    {
+        //尸体重力处理
+        if (anim.GetBool("IfDead") && coll.IsTouchingLayers(ground))
+        {
+            rb.bodyType = RigidbodyType2D.Static;
+        }
+
+        //杂七杂八的奇妙动画
+        if (rb.velocity.y < 0 && !coll.IsTouchingLayers(ground))
+        {
+            anim.SetBool("IfFalling", true);
+            anim.SetBool("IfGround", false);
+        }
+        if (anim.GetBool("IfFalling") && coll.IsTouchingLayers(ground))
+        {
+            anim.SetBool("IfFalling", false);
+            anim.SetBool("IfGround", true);
+        }
+        
+
+    }
+
+    //停止动画 //动画事件
+    void StopGroundAnim()
+    {
+        anim.SetBool("IfGround", false);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //攻击判定
     private void OnCollisionEnter2D(Collision2D collision)
