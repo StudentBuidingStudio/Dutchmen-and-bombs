@@ -10,7 +10,7 @@ public class Enemy_BaldPirate : MonoBehaviour
     public Animator animPlayer;
     public BoxCollider2D coll;
     private AudioSource audioDeath;
-    public Transform playerX;
+    public Transform playerTra;
     public LayerMask ground;
 
 
@@ -59,13 +59,15 @@ public class Enemy_BaldPirate : MonoBehaviour
     //ÒÆ¶¯
     void Movement()
     {
+
+        int playerFace = (int)(-1f * (transform.position.x - playerTra.position.x) / Mathf.Abs(transform.position.x - playerTra.position.x));
+
         //×·×Ù
-        if ((Mathf.Abs(transform.position.x - playerX.position.x) < 8) && !animPlayer.GetBool("IfDead"))
+        if ((Mathf.Abs(transform.position.x - playerTra.position.x) < 8) && !animPlayer.GetBool("IfDead"))
         {
             
-            rb.velocity = new Vector2((float)(-1 * speed *
-            (transform.position.x - playerX.position.x) / Mathf.Abs(transform.position.x - playerX.position.x)),
-            rb.velocity.y);
+            rb.velocity = new Vector2(speed * playerFace,rb.velocity.y);
+            
             
 
             anim.SetBool("IfRunning", true);
@@ -75,9 +77,7 @@ public class Enemy_BaldPirate : MonoBehaviour
             anim.SetBool("IfRunning", false);
         }
         //³¯Ïò
-        transform.localScale = new Vector2(-1 *
-            ((transform.position.x - playerX.position.x) / Mathf.Abs(transform.position.x - playerX.position.x)),
-            1);
+        transform.localScale = new Vector2(playerFace,1);
         
     }
 

@@ -213,10 +213,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    //收集
+    //碰撞互动
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        //收集
         if (collision.tag == "Hearts")
         {
             if (heart < 3)
@@ -233,9 +233,9 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.tag = "Untagged";
             
         }
-        
-        
-        //敌人互动
+
+
+        //敌人
         if (collision.tag == "Enemies")
         {
 
@@ -245,8 +245,12 @@ public class PlayerController : MonoBehaviour
             //踩踏伤害
             if (anim.GetBool("IfFalling") && collButton.IsTouching(collision))
             {
+                /*伤害
+                collision.gameObject.tag = "Untagged";*/
+
                 //伤害
-                collision.gameObject.tag = "Untagged";
+                
+
                 //力的作用是相互的
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
@@ -254,16 +258,17 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("IfFalling", false);
             }
             //受伤
-            else
+            else if (opTime==0)
             {
-                //物理属性
+                //物理
                 rb.velocity = new Vector2(5 * enemyFace, 0);
                 transform.localScale = new Vector3(-enemyFace, 1, 1);
-                //op时间
-                if (opTime == 0)
-                { heart -= 1; opTime = 10; }
+                //op时间                
+                opTime = 10; 
 
+                heart -= 1; 
                 ifHurt = true;
+
                 anim.SetBool("IfHurting", true);
 
             }

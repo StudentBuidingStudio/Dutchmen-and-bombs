@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animPlayer: {fileID: 306125995, guid: c165f55791e574d448edc7e9e9eef6e4, type: 3}
   coll: {fileID: 3442720367422679759}
-  playerX: {fileID: 4183999391679600584, guid: c165f55791e574d448edc7e9e9eef6e4, type: 3}
+  playerTra: {fileID: 4183999391679600584, guid: c165f55791e574d448edc7e9e9eef6e4, type: 3}
   ground:
     serializedVersion: 2
     m_Bits: 512
