@@ -238,6 +238,7 @@ public class PlayerController : MonoBehaviour
         //敌人
         if (collision.tag == "Enemies")
         {
+            
 
             //获取敌人方向
             float enemyFace = (transform.position.x - collision.gameObject.transform.position.x)

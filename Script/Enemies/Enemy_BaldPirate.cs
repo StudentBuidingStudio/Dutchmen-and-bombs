@@ -48,6 +48,7 @@ public class Enemy_BaldPirate : MonoBehaviour
     }
     void Update()
     { 
+        
         if (!coll.isTrigger)
         {
             Dead();
@@ -61,10 +62,11 @@ public class Enemy_BaldPirate : MonoBehaviour
     {
 
         int playerFace = (int)(-1f * (transform.position.x - playerTra.position.x) / Mathf.Abs(transform.position.x - playerTra.position.x));
-
+        
         //追踪
         if ((Mathf.Abs(transform.position.x - playerTra.position.x) < 8) && !animPlayer.GetBool("IfDead"))
         {
+            print("zhuizong");
             
             rb.velocity = new Vector2(speed * playerFace,rb.velocity.y);
             
@@ -108,11 +110,7 @@ public class Enemy_BaldPirate : MonoBehaviour
     //动画
     void AnimCtrl()
     {
-        //尸体重力处理
-        if (anim.GetBool("IfDead") && coll.IsTouchingLayers(ground))
-        {
-            rb.bodyType = RigidbodyType2D.Static;
-        }
+        
 
         //杂七杂八的奇妙动画
         if (rb.velocity.y < 0 && !coll.IsTouchingLayers(ground))
