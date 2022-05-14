@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     public bool ifJump, ifJumped1, ifJumped2;
     public LayerMask ground;
 
+    [Header("效果")]
+    SpriteRenderer sr;
+    Color color;
+
     [Header("音频")]
     public AudioSource audioCollectCrystal,audioCollectHeart, audioJump,audioDie;
     
@@ -36,7 +40,8 @@ public class PlayerController : MonoBehaviour
         //变量赋值
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        
+        sr = GetComponent<SpriteRenderer>();
+        color = sr.color;
 
         heart = 3;
         crystal = 0;
@@ -179,7 +184,16 @@ public class PlayerController : MonoBehaviour
 
         }
         else if (ifHurt)
-        {         
+        {
+            if (rb.velocity.x > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x - 0.1f, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(rb.velocity.x + 0.1f, rb.velocity.y);
+            }
+            
             if (Mathf.Abs(rb.velocity.x) < 0.1f)
             {
                 anim.SetBool("IfHurting", false);
@@ -238,16 +252,19 @@ public class PlayerController : MonoBehaviour
         //敌人
         if (collision.tag == "Enemies")
         {
+            //获取对象
+            GameObject enemy = collision.transform.parent.gameObject;
             
-
+            
             //获取敌人方向
-            float enemyFace = (transform.position.x - collision.gameObject.transform.position.x)
-                / Mathf.Abs(transform.position.x - collision.gameObject.transform.position.x);
+            float enemyFace = (transform.position.x - enemy.transform.position.x)
+                / Mathf.Abs(transform.position.x - enemy.transform.position.x);
             //踩踏伤害
             if (anim.GetBool("IfFalling") && collButton.IsTouching(collision))
             {
                 /*伤害
                 collision.gameObject.tag = "Untagged";*/
+
 
                 //伤害
                 
@@ -262,10 +279,11 @@ public class PlayerController : MonoBehaviour
             else if (opTime==0)
             {
                 //物理
-                rb.velocity = new Vector2(5 * enemyFace, 0);
+                rb.velocity = new Vector2(8 * enemyFace, 0);
                 transform.localScale = new Vector3(-enemyFace, 1, 1);
+
                 //op时间                
-                opTime = 10; 
+                opTime = 128; 
 
                 heart -= 1; 
                 ifHurt = true;
@@ -297,14 +315,10 @@ public class PlayerController : MonoBehaviour
         if (heart == 0)
         {
             Invoke("Die", 2f);
-            if (collButton.IsTouchingLayers(ground))
-            {
-                rb.bodyType = RigidbodyType2D.Static;
-            }
+            
             
             //物理属性
-            collMain.isTrigger = true;
-            collButton.isTrigger = true;
+            
             rb.velocity = new Vector2(0, rb.velocity.y);
 
             //终止音频
@@ -323,8 +337,42 @@ public class PlayerController : MonoBehaviour
         //op时间
         if (opTime != 0)
         {
+            
+
+            string colorAChange="-";
+
+            print(color.a);
+
             opTime -= 1;
+            if (color.a >= 255)
+            {
+                colorAChange = "-";
+            }
+            else if (color.a <= 0) 
+            {
+                colorAChange = "+";
+            }
+
+            if (colorAChange == "+")
+            {
+                color.a += 120 / (opTime + 1f);
+                
+            }
+            else
+            {
+                color.a -= 120/(opTime+1f);    
+            }
+
+
+
         }
+        else
+        {
+            color.a = 255;
+        }
+        sr.color = color;
+
+
     }
 
     //重开 //Invoke引用 

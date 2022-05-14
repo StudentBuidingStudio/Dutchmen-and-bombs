@@ -18,6 +18,8 @@ public class HealthCtrl : MonoBehaviour
     {
         PlayerController player = playerHea.GetComponent<PlayerController>();
         int heart = player.heart;
+        
+
         if (heart < 3)
         { heartImage3.SetActive(false); }
         else
